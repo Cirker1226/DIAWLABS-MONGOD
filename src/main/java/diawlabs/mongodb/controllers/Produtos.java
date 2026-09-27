@@ -3,8 +3,8 @@ package diawlabs.mongodb.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 import java.util.List;
-
 import diawlabs.mongodb.models.Produto;
 import diawlabs.mongodb.services.ProdutoService;
 
@@ -25,5 +25,18 @@ public class Produtos {
         return produtoService.adicionarProduto(produto);
     }
 
-    // Implemente métodos para atualizar, deletar e buscar produtos por id...
+    @GetMapping("/{id}")
+    public Produto buscarProdutoPorId(@PathVariable String id) {
+        return produtoService.buscarProdutoPorId(id);
+    }
+
+    @PutMapping("/{id}")
+    public Produto atualizarProduto(@PathVariable String id, @RequestBody Produto produto) {
+        return produtoService.atualizarProduto(id, produto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletarProduto(@PathVariable String id) {
+        produtoService.deletarProduto(id);
+    }
 }
